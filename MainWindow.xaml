@@ -1,0 +1,169 @@
+﻿<Window x:Class="CyberForgeStudio.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="XploitForge Studio - Professional Workspace" 
+        Height="700" Width="1100"
+        MinHeight="600" MinWidth="900"
+        Background="#18181F" Foreground="#E0E0E0"
+        WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <!-- Color Palette Brushes -->
+        <SolidColorBrush x:Key="BgDark" Color="#121217"/>
+        <SolidColorBrush x:Key="CardBg" Color="#1E1E26"/>
+        <SolidColorBrush x:Key="CardHover" Color="#2A2A36"/>
+        <SolidColorBrush x:Key="AccentPrimary" Color="#0066FF"/>
+        <SolidColorBrush x:Key="AccentSuccess" Color="#10B981"/>
+        <SolidColorBrush x:Key="BorderColor" Color="#2E2E3A"/>
+
+        <!-- Modern Rounded Button Style -->
+        <Style TargetType="Button" x:Key="ModernBtn">
+            <Setter Property="Background" Value="{StaticResource CardBg}"/>
+            <Setter Property="Foreground" Value="#FFFFFF"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="12,8"/>
+            <Setter Property="Margin" Value="0,0,0,8"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" 
+                                Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                CornerRadius="6" 
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="{StaticResource CardHover}"/>
+                                <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource AccentPrimary}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Tab Item Custom Style -->
+        <Style TargetType="TabItem">
+            <Setter Property="Foreground" Value="#A0A0B0"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Padding" Value="16,8"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TabItem">
+                        <Border x:Name="tabBorder" Background="Transparent" Padding="{TemplateBinding Padding}" Margin="0,0,4,0" CornerRadius="4">
+                            <ContentPresenter x:Name="ContentSite" VerticalAlignment="Center" HorizontalAlignment="Center" ContentSource="Header"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="tabBorder" Property="Background" Value="{StaticResource CardBg}"/>
+                                <Setter Property="Foreground" Value="#FFFFFF"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/> <!-- Top Bar -->
+            <RowDefinition Height="*"/>    <!-- Main Layout -->
+            <RowDefinition Height="Auto"/> <!-- Status Bar -->
+        </Grid.RowDefinitions>
+
+        <!-- TOP NAVIGATION & BRANDING -->
+        <Border Grid.Row="0" Background="{StaticResource CardBg}" CornerRadius="8" Padding="12" Margin="0,0,0,12" BorderBrush="{StaticResource BorderColor}" BorderThickness="1">
+            <Grid>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <Border Background="{StaticResource AccentPrimary}" CornerRadius="6" Width="32" Height="32" Margin="0,0,10,0">
+                        <TextBlock Text="⚡" Foreground="White" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock Text="XPLOITFORGE STUDIO" FontWeight="Bold" FontSize="14" Foreground="#FFFFFF"/>
+                        <TextBlock Text="Device Management Suite" FontSize="10" Foreground="#808090"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <!-- Connection Indicator -->
+                <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                    <Border Background="{StaticResource BgDark}" CornerRadius="20" Padding="10,4" Margin="0,0,10,0" BorderBrush="{StaticResource BorderColor}" BorderThickness="1">
+                        <StackPanel Orientation="Horizontal">
+                            <Ellipse x:Name="StatusDot" Width="8" Height="8" Fill="#EF4444" Margin="0,0,6,0" VerticalAlignment="Center"/>
+                            <TextBlock x:Name="TxtStatus" Text="Disconnected" Foreground="#A0A0B0" FontSize="11" FontWeight="SemiBold"/>
+                        </StackPanel>
+                    </Border>
+                    <Button Content="Refresh Device" Style="{StaticResource ModernBtn}" Margin="0" Padding="10,5" Click="BtnRefresh_Click"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- MAIN SPLIT WORKSPACE -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"/> <!-- Operations Column -->
+                <ColumnDefinition Width="6*"/> <!-- Console / Details Column -->
+            </Grid.ColumnDefinitions>
+
+            <!-- LEFT: ACTION CATEGORIES -->
+            <Border Grid.Column="0" Background="{StaticResource CardBg}" CornerRadius="8" Padding="12" Margin="0,0,6,0" BorderBrush="{StaticResource BorderColor}" BorderThickness="1">
+                <DockPanel>
+                    <!-- Sub-category Tabs -->
+                    <TabControl DockPanel.Dock="Top" Background="Transparent" BorderThickness="0" Margin="0,0,0,12">
+                        <TabItem Header="Device Info"/>
+                        <TabItem Header="ADB Actions"/>
+                        <TabItem Header="Fastboot"/>
+                    </TabControl>
+
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <StackPanel>
+                            <TextBlock Text="GENERAL UTILITIES" FontSize="11" FontWeight="Bold" Foreground="#606070" Margin="0,0,0,8"/>
+                            <Button Content="📱 Read Device Specs" Style="{StaticResource ModernBtn}" Click="BtnReadInfo_Click"/>
+                            <Button Content="🔄 Reboot Normal" Style="{StaticResource ModernBtn}" Click="BtnRebootNormal_Click"/>
+                            <Button Content="⚡ Reboot Bootloader" Style="{StaticResource ModernBtn}" Click="BtnRebootBootloader_Click"/>
+                            <Button Content="🛠️ Reboot Recovery" Style="{StaticResource ModernBtn}" Click="BtnRebootRecovery_Click"/>
+                        </StackPanel>
+                    </ScrollViewer>
+                </DockPanel>
+            </Border>
+
+            <!-- RIGHT: TERMINAL & LOG MONITOR -->
+            <Border Grid.Column="1" Background="{StaticResource CardBg}" CornerRadius="8" Padding="12" Margin="6,0,0,0" BorderBrush="{StaticResource BorderColor}" BorderThickness="1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0" Margin="0,0,0,8">
+                        <TextBlock Text="TERMINAL MONITOR" FontWeight="Bold" FontSize="12" Foreground="#808090" VerticalAlignment="Center"/>
+                        <Button Content="Clear Console" Style="{StaticResource ModernBtn}" HorizontalAlignment="Right" Margin="0" Padding="8,4" Click="BtnClearLogs_Click"/>
+                    </Grid>
+
+                    <!-- Console Box -->
+                    <Border Grid.Row="1" Background="{StaticResource BgDark}" CornerRadius="6" BorderBrush="{StaticResource BorderColor}" BorderThickness="1" Padding="8">
+                        <ListBox x:Name="LstLogs" Background="Transparent" BorderThickness="0" Foreground="{StaticResource AccentSuccess}" FontFamily="Consolas" FontSize="11"/>
+                    </Border>
+
+                    <!-- Info Bar -->
+                    <TextBlock Grid.Row="2" Text="System Status: Ready" Foreground="#606070" FontSize="10" Margin="0,8,0,0"/>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <!-- BOTTOM STATUS BAR -->
+        <Grid Grid.Row="2" Margin="0,8,0,0">
+            <TextBlock Text="CyberForge Studio Engine v1.0" Foreground="#505060" FontSize="10"/>
+        </Grid>
+    </Grid>
+</Window>
