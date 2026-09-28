@@ -3,17 +3,32 @@ F:\Dark_Devil\CyberForge Studio\bin\Debug\net8.0-windows\CyberForge Studio.deps.
 F:\Dark_Devil\CyberForge Studio\bin\Debug\net8.0-windows\CyberForge Studio.runtimeconfig.json
 F:\Dark_Devil\CyberForge Studio\bin\Debug\net8.0-windows\CyberForge Studio.dll
 F:\Dark_Devil\CyberForge Studio\bin\Debug\net8.0-windows\CyberForge Studio.pdb
+F:\Dark_Devil\CyberForge Studio\obj\Debug\net8.0-windows\MainWindow.baml
 F:\Dark_Devil\CyberForge Studio\obj\Debug\net8.0-windows\MainWindow.g.cs
 F:\Dark_Devil\CyberForge Studio\obj\Debug\net8.0-windows\App.g.cs
 F:\Dark_Devil\CyberForge Studio\obj\Debug\net8.0-windows\CyberForge Studio_MarkupCompile.cache
-F:\Dark_Devil\CyberForge Studio\obj\Debug\net8.0-windows\MainWindow.baml
 F:\Dark_Devil\CyberForge Studio\obj\Debug\net8.0-windows\CyberForge Studio.g.resources
 F:\Dark_Devil\CyberForge Studio\obj\Debug\net8.0-windows\CyberForge Studio.GeneratedMSBuildEditorConfig.editorconfig
 F:\Dark_Devil\CyberForge Studio\obj\Debug\net8.0-windows\CyberForge Studio.AssemblyInfoInputs.cache
 F:\Dark_Devil\CyberForge Studio\obj\Debug\net8.0-windows\CyberForge Studio.AssemblyInfo.cs
 F:\Dark_Devil\CyberForge Studio\obj\Debug\net8.0-windows\CyberForge Studio.csproj.CoreCompileInputs.cache
+F:\Dark_Devil\CyberForge Studio\obj\Debug\net8.0-windows\CyberForge Studio.sourcelink.json
 F:\Dark_Devil\CyberForge Studio\obj\Debug\net8.0-windows\CyberForge Studio.dll
 F:\Dark_Devil\CyberForge Studio\obj\Debug\net8.0-windows\refint\CyberForge Studio.dll
 F:\Dark_Devil\CyberForge Studio\obj\Debug\net8.0-windows\CyberForge Studio.pdb
 F:\Dark_Devil\CyberForge Studio\obj\Debug\net8.0-windows\CyberForge Studio.genruntimeconfig.cache
 F:\Dark_Devil\CyberForge Studio\obj\Debug\net8.0-windows\ref\CyberForge Studio.dll
+F:\Dark_Devil\CyberForge Studio\bin\Debug\net8.0-windows\Binaries\adb.exe
+F:\Dark_Devil\CyberForge Studio\bin\Debug\net8.0-windows\Binaries\AdbWinApi.dll
+F:\Dark_Devil\CyberForge Studio\bin\Debug\net8.0-windows\Binaries\AdbWinUsbApi.dll
+F:\Dark_Devil\CyberForge Studio\bin\Debug\net8.0-windows\Binaries\fastboot.exe
+F:\Dark_Devil\CyberForge Studio\bin\Debug\net8.0-windows\Binaries\etc1tool.exe
+F:\Dark_Devil\CyberForge Studio\bin\Debug\net8.0-windows\Binaries\hprof-conv.exe
+F:\Dark_Devil\CyberForge Studio\bin\Debug\net8.0-windows\Binaries\libwinpthread-1.dll
+F:\Dark_Devil\CyberForge Studio\bin\Debug\net8.0-windows\Binaries\make_f2fs.exe
+F:\Dark_Devil\CyberForge Studio\bin\Debug\net8.0-windows\Binaries\make_f2fs_casefold.exe
+F:\Dark_Devil\CyberForge Studio\bin\Debug\net8.0-windows\Binaries\mke2fs.conf
+F:\Dark_Devil\CyberForge Studio\bin\Debug\net8.0-windows\Binaries\mke2fs.exe
+F:\Dark_Devil\CyberForge Studio\bin\Debug\net8.0-windows\Binaries\NOTICE.txt
+F:\Dark_Devil\CyberForge Studio\bin\Debug\net8.0-windows\Binaries\source.properties
+F:\Dark_Devil\CyberForge Studio\bin\Debug\net8.0-windows\Binaries\sqlite3.exe
