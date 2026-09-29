@@ -32,3 +32,22 @@ F:\Dark_Devil\CyberForge Studio\bin\Debug\net8.0-windows\Binaries\mke2fs.exe
 F:\Dark_Devil\CyberForge Studio\bin\Debug\net8.0-windows\Binaries\NOTICE.txt
 F:\Dark_Devil\CyberForge Studio\bin\Debug\net8.0-windows\Binaries\source.properties
 F:\Dark_Devil\CyberForge Studio\bin\Debug\net8.0-windows\Binaries\sqlite3.exe
+C:\Users\saroj\AppData\Local\Temp\CyberForgeStudioBuild\CyberForge Studio.exe
+C:\Users\saroj\AppData\Local\Temp\CyberForgeStudioBuild\Binaries\adb.exe
+C:\Users\saroj\AppData\Local\Temp\CyberForgeStudioBuild\Binaries\AdbWinApi.dll
+C:\Users\saroj\AppData\Local\Temp\CyberForgeStudioBuild\Binaries\AdbWinUsbApi.dll
+C:\Users\saroj\AppData\Local\Temp\CyberForgeStudioBuild\Binaries\etc1tool.exe
+C:\Users\saroj\AppData\Local\Temp\CyberForgeStudioBuild\Binaries\fastboot.exe
+C:\Users\saroj\AppData\Local\Temp\CyberForgeStudioBuild\Binaries\hprof-conv.exe
+C:\Users\saroj\AppData\Local\Temp\CyberForgeStudioBuild\Binaries\libwinpthread-1.dll
+C:\Users\saroj\AppData\Local\Temp\CyberForgeStudioBuild\Binaries\make_f2fs.exe
+C:\Users\saroj\AppData\Local\Temp\CyberForgeStudioBuild\Binaries\make_f2fs_casefold.exe
+C:\Users\saroj\AppData\Local\Temp\CyberForgeStudioBuild\Binaries\mke2fs.conf
+C:\Users\saroj\AppData\Local\Temp\CyberForgeStudioBuild\Binaries\mke2fs.exe
+C:\Users\saroj\AppData\Local\Temp\CyberForgeStudioBuild\Binaries\NOTICE.txt
+C:\Users\saroj\AppData\Local\Temp\CyberForgeStudioBuild\Binaries\source.properties
+C:\Users\saroj\AppData\Local\Temp\CyberForgeStudioBuild\Binaries\sqlite3.exe
+C:\Users\saroj\AppData\Local\Temp\CyberForgeStudioBuild\CyberForge Studio.deps.json
+C:\Users\saroj\AppData\Local\Temp\CyberForgeStudioBuild\CyberForge Studio.runtimeconfig.json
+C:\Users\saroj\AppData\Local\Temp\CyberForgeStudioBuild\CyberForge Studio.dll
+C:\Users\saroj\AppData\Local\Temp\CyberForgeStudioBuild\CyberForge Studio.pdb

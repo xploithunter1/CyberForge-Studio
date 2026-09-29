@@ -19,7 +19,7 @@ namespace CyberForgeStudio
         {
             InitializeComponent();
             TxtSystemInfo.Text = $"Host OS: {Environment.OSVersion.Version}";
-            OperationTabs.SelectedIndex = 1;
+            OperationTabs.SelectedIndex = 0;
             TxtLoginStatus.Text = $"Brand: {_selectedBrand}";
             LogMessage("CyberForge Studio Initialized.");
             LogMessage("Android service console ready.");
@@ -126,10 +126,10 @@ namespace CyberForgeStudio
                 _selectedBrand = brand;
                 OperationTabs.SelectedIndex = brand switch
                 {
-                    "SAMSUNG" => 1,
+                    "SAMSUNG" => 0,
                     "QUALCOMM" => 4,
                     "MEDIATEK" or "UNISOC" => 3,
-                    _ => 2
+                    _ => 1
                 };
 
                 foreach (UIElement item in BrandSelector.Children)
