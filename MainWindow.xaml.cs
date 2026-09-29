@@ -140,6 +140,9 @@ namespace CyberForgeStudio
                         brandButton.Background = isSelected
                             ? (System.Windows.Media.Brush)FindResource("AccentBlue")
                             : (System.Windows.Media.Brush)FindResource("CardBg");
+                        brandButton.BorderBrush = isSelected
+                            ? (System.Windows.Media.Brush)FindResource("AccentBlue")
+                            : (System.Windows.Media.Brush)FindResource("BorderBrush");
                         brandButton.Foreground = isSelected
                             ? System.Windows.Media.Brushes.White
                             : (System.Windows.Media.Brush)FindResource("TextPrimary");

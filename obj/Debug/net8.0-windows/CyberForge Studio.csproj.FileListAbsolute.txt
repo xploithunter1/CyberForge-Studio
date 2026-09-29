@@ -51,3 +51,41 @@ C:\Users\saroj\AppData\Local\Temp\CyberForgeStudioBuild\CyberForge Studio.deps.j
 C:\Users\saroj\AppData\Local\Temp\CyberForgeStudioBuild\CyberForge Studio.runtimeconfig.json
 C:\Users\saroj\AppData\Local\Temp\CyberForgeStudioBuild\CyberForge Studio.dll
 C:\Users\saroj\AppData\Local\Temp\CyberForgeStudioBuild\CyberForge Studio.pdb
+C:\Users\saroj\AppData\Local\Temp\CyberForgeThemeBuild\Binaries\adb.exe
+C:\Users\saroj\AppData\Local\Temp\CyberForgeThemeBuild\Binaries\AdbWinApi.dll
+C:\Users\saroj\AppData\Local\Temp\CyberForgeThemeBuild\Binaries\AdbWinUsbApi.dll
+C:\Users\saroj\AppData\Local\Temp\CyberForgeThemeBuild\Binaries\etc1tool.exe
+C:\Users\saroj\AppData\Local\Temp\CyberForgeThemeBuild\Binaries\fastboot.exe
+C:\Users\saroj\AppData\Local\Temp\CyberForgeThemeBuild\Binaries\hprof-conv.exe
+C:\Users\saroj\AppData\Local\Temp\CyberForgeThemeBuild\Binaries\libwinpthread-1.dll
+C:\Users\saroj\AppData\Local\Temp\CyberForgeThemeBuild\Binaries\make_f2fs.exe
+C:\Users\saroj\AppData\Local\Temp\CyberForgeThemeBuild\Binaries\make_f2fs_casefold.exe
+C:\Users\saroj\AppData\Local\Temp\CyberForgeThemeBuild\Binaries\mke2fs.conf
+C:\Users\saroj\AppData\Local\Temp\CyberForgeThemeBuild\Binaries\mke2fs.exe
+C:\Users\saroj\AppData\Local\Temp\CyberForgeThemeBuild\Binaries\NOTICE.txt
+C:\Users\saroj\AppData\Local\Temp\CyberForgeThemeBuild\Binaries\source.properties
+C:\Users\saroj\AppData\Local\Temp\CyberForgeThemeBuild\Binaries\sqlite3.exe
+C:\Users\saroj\AppData\Local\Temp\CyberForgeThemeBuild\CyberForge Studio.exe
+C:\Users\saroj\AppData\Local\Temp\CyberForgeThemeBuild\CyberForge Studio.deps.json
+C:\Users\saroj\AppData\Local\Temp\CyberForgeThemeBuild\CyberForge Studio.runtimeconfig.json
+C:\Users\saroj\AppData\Local\Temp\CyberForgeThemeBuild\CyberForge Studio.dll
+C:\Users\saroj\AppData\Local\Temp\CyberForgeThemeBuild\CyberForge Studio.pdb
+C:\Users\saroj\AppData\Local\Temp\CyberForgeResponsiveBuild\Binaries\adb.exe
+C:\Users\saroj\AppData\Local\Temp\CyberForgeResponsiveBuild\Binaries\AdbWinApi.dll
+C:\Users\saroj\AppData\Local\Temp\CyberForgeResponsiveBuild\Binaries\AdbWinUsbApi.dll
+C:\Users\saroj\AppData\Local\Temp\CyberForgeResponsiveBuild\Binaries\etc1tool.exe
+C:\Users\saroj\AppData\Local\Temp\CyberForgeResponsiveBuild\Binaries\fastboot.exe
+C:\Users\saroj\AppData\Local\Temp\CyberForgeResponsiveBuild\Binaries\hprof-conv.exe
+C:\Users\saroj\AppData\Local\Temp\CyberForgeResponsiveBuild\Binaries\libwinpthread-1.dll
+C:\Users\saroj\AppData\Local\Temp\CyberForgeResponsiveBuild\Binaries\make_f2fs.exe
+C:\Users\saroj\AppData\Local\Temp\CyberForgeResponsiveBuild\Binaries\make_f2fs_casefold.exe
+C:\Users\saroj\AppData\Local\Temp\CyberForgeResponsiveBuild\Binaries\mke2fs.conf
+C:\Users\saroj\AppData\Local\Temp\CyberForgeResponsiveBuild\Binaries\mke2fs.exe
+C:\Users\saroj\AppData\Local\Temp\CyberForgeResponsiveBuild\Binaries\NOTICE.txt
+C:\Users\saroj\AppData\Local\Temp\CyberForgeResponsiveBuild\Binaries\source.properties
+C:\Users\saroj\AppData\Local\Temp\CyberForgeResponsiveBuild\Binaries\sqlite3.exe
+C:\Users\saroj\AppData\Local\Temp\CyberForgeResponsiveBuild\CyberForge Studio.exe
+C:\Users\saroj\AppData\Local\Temp\CyberForgeResponsiveBuild\CyberForge Studio.deps.json
+C:\Users\saroj\AppData\Local\Temp\CyberForgeResponsiveBuild\CyberForge Studio.runtimeconfig.json
+C:\Users\saroj\AppData\Local\Temp\CyberForgeResponsiveBuild\CyberForge Studio.dll
+C:\Users\saroj\AppData\Local\Temp\CyberForgeResponsiveBuild\CyberForge Studio.pdb
