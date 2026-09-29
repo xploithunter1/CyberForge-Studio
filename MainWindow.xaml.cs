@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Interop;
+using CyberForgeStudio.Models;
 
 namespace CyberForgeStudio
 {
@@ -14,10 +17,15 @@ namespace CyberForgeStudio
         private const int DBT_DEVICEARRIVAL = 0x8000;
         private const int DBT_DEVICEREMOVALCOMPLETE = 0x8004;
         private string _selectedBrand = "SAMSUNG";
+        private readonly ObservableCollection<ConnectedDevice> _connectedDevices = new();
+        private readonly SemaphoreSlim _deviceScanLock = new(1, 1);
+
+        private sealed record CommandResult(int ExitCode, string Output, string Error);
 
         public MainWindow()
         {
             InitializeComponent();
+            CmbDevices.ItemsSource = _connectedDevices;
             TxtSystemInfo.Text = $"Host OS: {Environment.OSVersion.Version}";
             OperationTabs.SelectedIndex = 0;
             TxtLoginStatus.Text = $"Brand: {_selectedBrand}";
@@ -55,12 +63,110 @@ namespace CyberForgeStudio
 
         private async Task ScanUsbDevicesAsync()
         {
-            LogMessage("Checking ADB and Fastboot connections...");
-            await RunCommandAsync("adb", "devices", "-l");
-            await RunCommandAsync("fastboot", "devices");
+            if (!await _deviceScanLock.WaitAsync(0))
+            {
+                return;
+            }
+
+            try
+            {
+                ConnectedDevice? previousSelection = CmbDevices.SelectedItem as ConnectedDevice;
+                List<ConnectedDevice> discoveredDevices = new();
+                LogMessage("Scanning ADB and Fastboot devices...");
+
+                CommandResult adbResult = await RunCommandAsync("adb", "devices", "-l");
+                foreach (string line in adbResult.Output.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    string[] fields = line.Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries);
+                    if (fields.Length < 2 || !IsAdbState(fields[1]))
+                    {
+                        continue;
+                    }
+
+                    string? model = null;
+                    foreach (string field in fields)
+                    {
+                        if (field.StartsWith("model:", StringComparison.OrdinalIgnoreCase))
+                        {
+                            model = field.Substring("model:".Length).Replace('_', ' ');
+                            break;
+                        }
+                    }
+
+                    discoveredDevices.Add(new ConnectedDevice
+                    {
+                        Serial = fields[0],
+                        Mode = "ADB",
+                        State = fields[1],
+                        Model = model
+                    });
+                }
+
+                CommandResult fastbootResult = await RunCommandAsync("fastboot", "devices");
+                foreach (string line in fastbootResult.Output.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    string[] fields = line.Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries);
+                    if (fields.Length == 0 || discoveredDevices.Exists(device => device.Serial == fields[0] && device.Mode == "Fastboot"))
+                    {
+                        continue;
+                    }
+
+                    discoveredDevices.Add(new ConnectedDevice
+                    {
+                        Serial = fields[0],
+                        Mode = "Fastboot",
+                        State = fields.Length > 1 ? fields[1] : "fastboot"
+                    });
+                }
+
+                _connectedDevices.Clear();
+                foreach (ConnectedDevice device in discoveredDevices)
+                {
+                    _connectedDevices.Add(device);
+                }
+
+                if (previousSelection != null)
+                {
+                    foreach (ConnectedDevice device in _connectedDevices)
+                    {
+                        if (device.Serial == previousSelection.Serial && device.Mode == previousSelection.Mode)
+                        {
+                            CmbDevices.SelectedItem = device;
+                            break;
+                        }
+                    }
+                }
+
+                if (CmbDevices.SelectedItem == null)
+                {
+                    foreach (ConnectedDevice device in _connectedDevices)
+                    {
+                        if (device.State == "device")
+                        {
+                            CmbDevices.SelectedItem = device;
+                            break;
+                        }
+                    }
+                    CmbDevices.SelectedItem ??= _connectedDevices.Count > 0 ? _connectedDevices[0] : null;
+                }
+
+                TxtLoginStatus.Text = _connectedDevices.Count == 0
+                    ? "No devices detected"
+                    : $"{_connectedDevices.Count} device(s) detected";
+                LogMessage($"Device scan complete: {_connectedDevices.Count} device(s) found.");
+            }
+            finally
+            {
+                _deviceScanLock.Release();
+            }
         }
 
-        private async Task RunCommandAsync(string command, params string[] args)
+        private static bool IsAdbState(string state)
+        {
+            return state is "device" or "offline" or "unauthorized" or "recovery" or "sideload" or "no";
+        }
+
+        private async Task<CommandResult> RunCommandAsync(string command, params string[] args)
         {
             LogMessage($"Executing: {command} {string.Join(" ", args)}");
             try
@@ -82,7 +188,7 @@ namespace CyberForgeStudio
                 if (!process.Start())
                 {
                     LogMessage($"[Error] Could not start {command}.");
-                    return;
+                    return new CommandResult(-1, string.Empty, "Could not start process.");
                 }
 
                 Task<string> outputTask = process.StandardOutput.ReadToEndAsync();
@@ -94,11 +200,40 @@ namespace CyberForgeStudio
                 if (!string.IsNullOrWhiteSpace(output)) LogMessage($"[OUT] {output.Trim()}");
                 if (!string.IsNullOrWhiteSpace(error)) LogMessage($"[ERR] {error.Trim()}");
                 LogMessage($"Operation finished (exit code {process.ExitCode}).");
+                return new CommandResult(process.ExitCode, output, error);
             }
             catch (Exception ex)
             {
                 LogMessage($"[Error] Could not run {command}: {ex.Message}");
+                return new CommandResult(-1, string.Empty, ex.Message);
             }
+        }
+
+        private async Task RunSelectedDeviceCommandAsync(string requiredMode, params string[] args)
+        {
+            if (CmbDevices.SelectedItem is not ConnectedDevice device)
+            {
+                LogMessage("Select a connected device first, then scan again if it is missing.");
+                return;
+            }
+
+            if (device.Mode != requiredMode)
+            {
+                LogMessage($"Selected device is in {device.Mode} mode; this action requires {requiredMode} mode.");
+                return;
+            }
+
+            if (device.Mode == "ADB" && device.State != "device")
+            {
+                LogMessage($"ADB device {device.Serial} is {device.State}; authorize it and scan again.");
+                return;
+            }
+
+            string[] targetedArguments = new string[args.Length + 2];
+            targetedArguments[0] = "-s";
+            targetedArguments[1] = device.Serial;
+            Array.Copy(args, 0, targetedArguments, 2, args.Length);
+            await RunCommandAsync(device.Mode == "ADB" ? "adb" : "fastboot", targetedArguments);
         }
 
         private static string ResolveToolPath(string command)
@@ -156,10 +291,29 @@ namespace CyberForgeStudio
 
         private async void BtnReadInfo_Click(object sender, RoutedEventArgs e)
         {
-            LogMessage("Reading ADB Device Info...");
-            await RunCommandAsync("adb", "devices", "-l");
-            await RunCommandAsync("adb", "shell", "getprop", "ro.product.model");
-            await RunCommandAsync("adb", "shell", "getprop", "ro.build.version.release");
+            if (CmbDevices.SelectedItem is not ConnectedDevice device)
+            {
+                await ScanUsbDevicesAsync();
+                if (CmbDevices.SelectedItem is not ConnectedDevice)
+                {
+                    LogMessage("No selectable device found. Check the USB cable, drivers, and device mode.");
+                    return;
+                }
+                device = (ConnectedDevice)CmbDevices.SelectedItem;
+            }
+
+            LogMessage($"Reading information for {device.DisplayName}...");
+            if (device.Mode == "ADB")
+            {
+                await RunSelectedDeviceCommandAsync("ADB", "shell", "getprop", "ro.product.model");
+                await RunSelectedDeviceCommandAsync("ADB", "shell", "getprop", "ro.build.version.release");
+                await RunSelectedDeviceCommandAsync("ADB", "shell", "getprop", "ro.product.manufacturer");
+            }
+            else
+            {
+                await RunSelectedDeviceCommandAsync("Fastboot", "getvar", "product");
+                await RunSelectedDeviceCommandAsync("Fastboot", "getvar", "version");
+            }
         }
 
         private async void BtnScanDevices_Click(object sender, RoutedEventArgs e)
@@ -170,7 +324,7 @@ namespace CyberForgeStudio
         private async void BtnAdbRebootRecovery_Click(object sender, RoutedEventArgs e)
         {
             LogMessage("Rebooting device to Recovery Mode...");
-            await RunCommandAsync("adb", "reboot", "recovery");
+            await RunSelectedDeviceCommandAsync("ADB", "reboot", "recovery");
         }
 
         private async void BtnAdbRebootDownload_Click(object sender, RoutedEventArgs e)
@@ -178,13 +332,20 @@ namespace CyberForgeStudio
             string targetMode = _selectedBrand == "SAMSUNG" ? "download" : "bootloader";
             string displayMode = _selectedBrand == "SAMSUNG" ? "Download Mode" : "Bootloader/Fastboot Mode";
             LogMessage($"Requesting reboot to {displayMode}...");
-            await RunCommandAsync("adb", "reboot", targetMode);
+            await RunSelectedDeviceCommandAsync("ADB", "reboot", targetMode);
         }
 
         private async void BtnReboot_Click(object sender, RoutedEventArgs e)
         {
             LogMessage("Rebooting System...");
-            await RunCommandAsync("adb", "reboot");
+            if (CmbDevices.SelectedItem is ConnectedDevice device)
+            {
+                await RunSelectedDeviceCommandAsync(device.Mode, "reboot");
+            }
+            else
+            {
+                LogMessage("Select a connected device before rebooting.");
+            }
         }
 
         private void BtnDeviceManager_Click(object sender, RoutedEventArgs e)

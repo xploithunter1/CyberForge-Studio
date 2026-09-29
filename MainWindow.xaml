@@ -222,14 +222,28 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <Grid Margin="0,0,0,5">
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                            <Button Content="Device Manager" Click="BtnDeviceManager_Click" Style="{StaticResource BrandBtn}" Padding="7,4"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                            <Button Content="Info" Click="BtnReadInfo_Click" Style="{StaticResource BrandBtn}" Padding="8,4"/>
-                            <Button Content="Reboot" Click="BtnReboot_Click" Style="{StaticResource BrandBtn}" Background="{StaticResource AccentRed}" Foreground="White" Padding="8,4"/>
-                        </StackPanel>
+                    <Grid Grid.Row="0" Margin="0,0,0,5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid>
+                            <Button Content="Device Manager" Click="BtnDeviceManager_Click" Style="{StaticResource BrandBtn}" Padding="7,4" HorizontalAlignment="Left"/>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                <Button Content="Info" Click="BtnReadInfo_Click" Style="{StaticResource BrandBtn}" Padding="8,4"/>
+                                <Button Content="Reboot" Click="BtnReboot_Click" Style="{StaticResource BrandBtn}" Background="{StaticResource AccentRed}" Foreground="White" Padding="8,4"/>
+                            </StackPanel>
+                        </Grid>
+                        <Grid Grid.Row="1" Margin="0,3,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Device" VerticalAlignment="Center" Margin="1,0,5,0" FontSize="9" Foreground="{StaticResource TextSecondary}"/>
+                            <ComboBox x:Name="CmbDevices" Grid.Column="1" DisplayMemberPath="DisplayName" MinHeight="25" VerticalContentAlignment="Center" ToolTip="Select a connected ADB or Fastboot device"/>
+                            <Button Grid.Column="2" Content="Scan" Click="BtnScanDevices_Click" Style="{StaticResource BrandBtn}" Padding="7,3" Margin="4,0,0,0"/>
+                        </Grid>
                     </Grid>
                     <Border Grid.Row="1" Background="#F4F4F4" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" Padding="4">
                         <ListBox x:Name="LstLogs" Background="Transparent" BorderThickness="0" Foreground="#393939" FontFamily="Consolas" FontSize="9"/>
@@ -241,7 +255,6 @@
                 </Grid>
             </Border>
         </Grid>
-
         <Border Grid.Row="2" Background="White" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" Padding="5,2">
             <Grid>
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">

@@ -89,3 +89,22 @@ C:\Users\saroj\AppData\Local\Temp\CyberForgeResponsiveBuild\CyberForge Studio.de
 C:\Users\saroj\AppData\Local\Temp\CyberForgeResponsiveBuild\CyberForge Studio.runtimeconfig.json
 C:\Users\saroj\AppData\Local\Temp\CyberForgeResponsiveBuild\CyberForge Studio.dll
 C:\Users\saroj\AppData\Local\Temp\CyberForgeResponsiveBuild\CyberForge Studio.pdb
+C:\Users\saroj\AppData\Local\Temp\CyberForgeDeviceBuild\Binaries\adb.exe
+C:\Users\saroj\AppData\Local\Temp\CyberForgeDeviceBuild\Binaries\AdbWinApi.dll
+C:\Users\saroj\AppData\Local\Temp\CyberForgeDeviceBuild\Binaries\AdbWinUsbApi.dll
+C:\Users\saroj\AppData\Local\Temp\CyberForgeDeviceBuild\Binaries\etc1tool.exe
+C:\Users\saroj\AppData\Local\Temp\CyberForgeDeviceBuild\Binaries\fastboot.exe
+C:\Users\saroj\AppData\Local\Temp\CyberForgeDeviceBuild\Binaries\hprof-conv.exe
+C:\Users\saroj\AppData\Local\Temp\CyberForgeDeviceBuild\Binaries\libwinpthread-1.dll
+C:\Users\saroj\AppData\Local\Temp\CyberForgeDeviceBuild\Binaries\make_f2fs.exe
+C:\Users\saroj\AppData\Local\Temp\CyberForgeDeviceBuild\Binaries\make_f2fs_casefold.exe
+C:\Users\saroj\AppData\Local\Temp\CyberForgeDeviceBuild\Binaries\mke2fs.conf
+C:\Users\saroj\AppData\Local\Temp\CyberForgeDeviceBuild\Binaries\mke2fs.exe
+C:\Users\saroj\AppData\Local\Temp\CyberForgeDeviceBuild\Binaries\NOTICE.txt
+C:\Users\saroj\AppData\Local\Temp\CyberForgeDeviceBuild\Binaries\source.properties
+C:\Users\saroj\AppData\Local\Temp\CyberForgeDeviceBuild\Binaries\sqlite3.exe
+C:\Users\saroj\AppData\Local\Temp\CyberForgeDeviceBuild\CyberForge Studio.exe
+C:\Users\saroj\AppData\Local\Temp\CyberForgeDeviceBuild\CyberForge Studio.deps.json
+C:\Users\saroj\AppData\Local\Temp\CyberForgeDeviceBuild\CyberForge Studio.runtimeconfig.json
+C:\Users\saroj\AppData\Local\Temp\CyberForgeDeviceBuild\CyberForge Studio.dll
+C:\Users\saroj\AppData\Local\Temp\CyberForgeDeviceBuild\CyberForge Studio.pdb
