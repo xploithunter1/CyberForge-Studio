@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CyberForge Studio")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+81718f907cba960ece27857a28fd6fb6370b7db2")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+33abe1eadb21a6a8332a635744196d676855ee3f")]
 [assembly: System.Reflection.AssemblyProductAttribute("CyberForge Studio")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CyberForge Studio")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
